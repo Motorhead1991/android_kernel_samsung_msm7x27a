@@ -25,6 +25,9 @@
 #include <asm/mach/time.h>
 #include <mach/msm_iomap.h>
 
+#define MSM_GPT_BASE MSM_TMR_BASE
+#define MSM_DGT_BASE (MSM_TMR_BASE + 0x10)
+
 #ifndef MSM_DGT_BASE
 #define MSM_DGT_BASE (MSM_GPT_BASE + 0x10)
 #endif
