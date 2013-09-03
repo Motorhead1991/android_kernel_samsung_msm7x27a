@@ -45,6 +45,9 @@ struct clk_ops {
 	unsigned (*get_rate)(unsigned id);
 	unsigned (*is_enabled)(unsigned id);
 	long (*round_rate)(unsigned id, unsigned rate);
+	int (*set_parent)(struct clk *clk, struct clk *parent);
+	struct clk *(*get_parent)(struct clk *clk);
+	bool (*is_local)(struct clk *clk);
 };
 
 struct clk {
@@ -57,7 +60,15 @@ struct clk {
 	const char *dbg_name;
 	struct list_head list;
 	struct device *dev;
+
+	struct list_head children;
+	struct list_head siblings;
 };
+
+#define CLK_INIT(name) \
+	.lock = __SPIN_LOCK_UNLOCKED((name).lock), \
+	.children = LIST_HEAD_INIT((name).children), \
+	.siblings = LIST_HEAD_INIT((name).siblings)
 
 #define A11S_CLK_CNTL_ADDR		(MSM_CSR_BASE + 0x100)
 #define A11S_CLK_SEL_ADDR		(MSM_CSR_BASE + 0x104)
