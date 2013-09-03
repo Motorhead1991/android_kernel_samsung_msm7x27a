@@ -10,6 +10,7 @@
 #define _LINUX_NFS_FS_H
 
 #include <linux/magic.h>
+#include <mach/barriers.h>
 
 /* Default timeout values */
 #define NFS_DEF_UDP_TIMEO	(11)

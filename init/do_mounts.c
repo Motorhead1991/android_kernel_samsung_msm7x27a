@@ -22,6 +22,7 @@
 #include <linux/nfs_mount.h>
 
 #include "do_mounts.h"
+#include <mach/barriers.h>
 
 int __initdata rd_doload;	/* 1 = load RAM disk, 0 = don't load */
 
